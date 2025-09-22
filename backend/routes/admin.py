@@ -22,6 +22,7 @@ from schemas.course import CourseSchema
 from schemas.user import UserSchema
 from utils.decorators import admin_required
 from utils.email import send_email
+from utils.sanitization import sanitize_html
 
 admin_bp = Blueprint("admin", __name__)
 admin_user_schema = UserSchema(many=True)
@@ -184,12 +185,16 @@ def create_section(chapter_id: int):
 def create_lesson(section_id: int):
     section = Section.query.get_or_404(section_id)
     payload = request.get_json() or {}
+    attachments = payload.get("attachments", [])
+    if not isinstance(attachments, list):
+        attachments = []
+
     lesson = Lesson(
         section_id=section.id,
         title=payload.get("title", "Новый урок"),
-        content=payload.get("content", ""),
+        content=sanitize_html(payload.get("content", "")),
         video_url=payload.get("video_url"),
-        attachments=json.dumps(payload.get("attachments", [])),
+        attachments=json.dumps([str(item) for item in attachments]),
         order_index=payload.get("order_index", len(section.lessons)),
         estimated_minutes=payload.get("estimated_minutes", 15),
     )
@@ -206,11 +211,16 @@ def update_lesson(lesson_id: int):
     lesson = Lesson.query.get_or_404(lesson_id)
     payload = request.get_json() or {}
 
-    for attr in ["title", "content", "video_url", "order_index", "estimated_minutes"]:
+    for attr in ["title", "video_url", "order_index", "estimated_minutes"]:
         if attr in payload:
             setattr(lesson, attr, payload[attr])
+    if "content" in payload:
+        lesson.content = sanitize_html(payload["content"])
     if "attachments" in payload:
-        lesson.attachments = json.dumps(payload["attachments"])
+        attachments = payload.get("attachments", [])
+        if not isinstance(attachments, list):
+            attachments = []
+        lesson.attachments = json.dumps([str(item) for item in attachments])
 
     db.session.commit()
     _log_admin_action("update_lesson", {"lesson_id": lesson.id})
@@ -223,5 +233,5 @@ def update_lesson(lesson_id: int):
 def preview_content():
     payload = request.get_json() or {}
     content = payload.get("content", "")
-    return jsonify({"preview": content})
+    return jsonify({"preview": sanitize_html(content)})
 

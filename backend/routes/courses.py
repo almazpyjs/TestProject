@@ -43,6 +43,8 @@ def course_detail(slug: str):
 def lesson_detail(slug: str, lesson_id: int):
     course = Course.query.filter_by(slug=slug).first_or_404()
     lesson = Lesson.query.filter_by(id=lesson_id).first_or_404()
+    if lesson.section.chapter.course_id != course.id:
+        return jsonify({"error": "Lesson not found in this course"}), 404
 
     is_unlocked = False
     if current_user:

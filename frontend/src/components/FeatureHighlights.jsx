@@ -1,21 +1,51 @@
 import { motion } from 'framer-motion';
-import { CommandLineIcon, CubeIcon, AcademicCapIcon } from '@heroicons/react/24/outline';
+
+function TerminalIcon({ className = 'h-10 w-10' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <rect x="3" y="4" width="18" height="16" rx="2" ry="2" />
+      <path d="m7 9 3 3-3 3" />
+      <path d="M13 15h4" />
+    </svg>
+  );
+}
+
+function LibraryIcon({ className = 'h-10 w-10' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M5 4h4v16H5z" />
+      <path d="M15 4h4v16h-4z" />
+      <path d="M9 4h6v16H9z" />
+    </svg>
+  );
+}
+
+function CareerIcon({ className = 'h-10 w-10' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M3 7h18v10H3z" />
+      <path d="M9 7V5a3 3 0 0 1 3-3 3 3 0 0 1 3 3v2" />
+      <path d="M12 12v5" />
+      <path d="m9 17 3 3 3-3" />
+    </svg>
+  );
+}
 
 const features = [
   {
     title: 'Практика на реальных проектах',
     description: 'От автоматизации с os и sys до построения REST API на Flask с SQLAlchemy.',
-    icon: CommandLineIcon
+    icon: TerminalIcon
   },
   {
     title: 'Встроенные библиотеки Python',
     description: 'Детальные модули по datetime, collections, itertools с практическими кейсами.',
-    icon: CubeIcon
+    icon: LibraryIcon
   },
   {
     title: 'Карьерное сопровождение',
     description: 'Подготовка к собеседованиям, ревью резюме и доступ к закрытым вакансиям.',
-    icon: AcademicCapIcon
+    icon: CareerIcon
   }
 ];
 

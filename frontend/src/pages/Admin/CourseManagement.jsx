@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { createChapter, createCourse, createLesson, createSection, previewContent } from '../../services/adminService';
 import { fetchCourse } from '../../services/courseService';
+import RichTextEditor from '../../components/RichTextEditor';
 
 function CourseManagement() {
   const [course, setCourse] = useState(null);
@@ -127,7 +126,7 @@ function CourseManagement() {
             placeholder="Ссылка на видео (YouTube)"
             className="mt-3 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-inner transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 dark:border-slate-700 dark:bg-slate-900"
           />
-          <CKEditor editor={ClassicEditor} data={content} onChange={(_, editor) => setContent(editor.getData())} />
+          <RichTextEditor value={content} onChange={setContent} />
           <div className="mt-4 flex flex-wrap gap-3">
             <button
               onClick={handlePreview}

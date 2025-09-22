@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from extensions import bcrypt, db
 from models import Chapter, Course, Lesson, Section, SubscriptionTier, User
+from utils.sanitization import sanitize_html
 
 
 def seed_database() -> None:
@@ -78,7 +79,9 @@ def seed_database() -> None:
                 section_id=section1.id,
                 title="Введение в переменные",
                 order_index=1,
-                content="""<h2>Переменные</h2><p>В Python переменная создается при присвоении значения.</p><pre><code>name = 'Pythonist'</code></pre>""",
+                content=sanitize_html(
+                    """<h2>Переменные</h2><p>В Python переменная создается при присвоении значения.</p><pre><code>name = 'Pythonist'</code></pre>"""
+                ),
                 video_url="https://www.youtube.com/embed/_uQrJ0TkZlc",
                 attachments='["variables.pdf"]',
             ),
@@ -86,32 +89,42 @@ def seed_database() -> None:
                 section_id=section2.id,
                 title="Условные операторы",
                 order_index=1,
-                content="""<h2>if/else</h2><p>Примеры использования условий.</p><pre><code>if score &gt;= 90:\n    grade = 'A'</code></pre>""",
+                content=sanitize_html(
+                    """<h2>if/else</h2><p>Примеры использования условий.</p><pre><code>if score &gt;= 90:\n    grade = 'A'</code></pre>"""
+                ),
                 attachments='["conditions.ipynb"]',
             ),
             Lesson(
                 section_id=section3.id,
                 title="Циклы",
                 order_index=1,
-                content="""<h2>Циклы</h2><p>Циклы позволяют повторять действия.</p><pre><code>for item in items:\n    print(item)</code></pre>""",
+                content=sanitize_html(
+                    """<h2>Циклы</h2><p>Циклы позволяют повторять действия.</p><pre><code>for item in items:\n    print(item)</code></pre>"""
+                ),
             ),
             Lesson(
                 section_id=section4.id,
                 title="Работа с os и sys",
                 order_index=1,
-                content="""<h2>os и sys</h2><p>Путь к автоматизации.</p><pre><code>import os, sys</code></pre>""",
+                content=sanitize_html(
+                    """<h2>os и sys</h2><p>Путь к автоматизации.</p><pre><code>import os, sys</code></pre>"""
+                ),
             ),
             Lesson(
                 section_id=section5.id,
                 title="Datetime основы",
                 order_index=1,
-                content="""<h2>datetime</h2><p>Даты и время.</p><pre><code>from datetime import datetime</code></pre>""",
+                content=sanitize_html(
+                    """<h2>datetime</h2><p>Даты и время.</p><pre><code>from datetime import datetime</code></pre>"""
+                ),
             ),
             Lesson(
                 section_id=section6.id,
                 title="Collections и itertools",
                 order_index=1,
-                content="""<h2>collections</h2><p>Работаем с Counter.</p><pre><code>from collections import Counter</code></pre>""",
+                content=sanitize_html(
+                    """<h2>collections</h2><p>Работаем с Counter.</p><pre><code>from collections import Counter</code></pre>"""
+                ),
             ),
         ]
         db.session.add_all(lessons)

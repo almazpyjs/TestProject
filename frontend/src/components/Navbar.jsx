@@ -1,8 +1,23 @@
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import ThemeToggle from './ThemeToggle';
 import { useAuth } from '../context/AuthContext';
+
+function MenuIcon({ className = 'h-6 w-6' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M3 6h18M3 12h18M3 18h18" />
+    </svg>
+  );
+}
+
+function CloseIcon({ className = 'h-6 w-6' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M6 6l12 12M6 18 18 6" />
+    </svg>
+  );
+}
 
 const navItems = [
   { to: '/', label: 'Главная', exact: true },
@@ -37,7 +52,7 @@ function Navbar() {
             className="rounded-full p-2 text-slate-600 transition hover:bg-slate-200 dark:text-slate-100 dark:hover:bg-slate-800"
             aria-label="Toggle navigation"
           >
-            {open ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
+            {open ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
         <div className="hidden items-center gap-6 lg:flex">
