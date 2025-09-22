@@ -1,17 +1,27 @@
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 from flask import Flask, jsonify
 
-from .config import Config
-from .extensions import db, init_extensions, jwt
-from .models import AdminLog, User
-from .routes.admin import admin_bp
-from .routes.auth import auth_bp
-from .routes.courses import courses_bp
-from .routes.users import user_bp
-from .seed import seed_database
+if __package__ is None or __package__ == "":
+    # Allow running "flask --app app.py" from the backend folder by
+    # exposing the repository root to the import system so that
+    # ``backend`` behaves like a regular package.
+    current_dir = Path(__file__).resolve().parent
+    repository_root = current_dir.parent
+    if str(repository_root) not in sys.path:
+        sys.path.insert(0, str(repository_root))
+
+from backend.config import Config
+from backend.extensions import db, init_extensions, jwt
+from backend.models import AdminLog, User
+from backend.routes.admin import admin_bp
+from backend.routes.auth import auth_bp
+from backend.routes.courses import courses_bp
+from backend.routes.users import user_bp
+from backend.seed import seed_database
 
 
 def create_app(config_class: type[Config] = Config) -> Flask:

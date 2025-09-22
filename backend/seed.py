@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from .extensions import bcrypt, db
-from .models import Chapter, Course, Lesson, Section, SubscriptionTier, User
+from backend.extensions import bcrypt, db
+from backend.models import Chapter, Course, Lesson, Section, SubscriptionTier, User
 
 
 def seed_database() -> None:

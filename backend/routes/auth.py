@@ -12,9 +12,9 @@ from flask_jwt_extended import (
 )
 from itsdangerous import URLSafeTimedSerializer
 
-from ..extensions import bcrypt, db
-from ..models import User, UserStatus
-from ..utils.email import send_email
+from backend.extensions import bcrypt, db
+from backend.models import User, UserStatus
+from backend.utils.email import send_email
 
 auth_bp = Blueprint("auth", __name__)
 

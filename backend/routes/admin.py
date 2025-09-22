@@ -6,8 +6,8 @@ from datetime import datetime
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import current_user, jwt_required
 
-from ..extensions import db
-from ..models import (
+from backend.extensions import db
+from backend.models import (
     AdminLog,
     Chapter,
     Course,
@@ -18,10 +18,10 @@ from ..models import (
     User,
     UserStatus,
 )
-from ..schemas.course import CourseSchema
-from ..schemas.user import UserSchema
-from ..utils.decorators import admin_required
-from ..utils.email import send_email
+from backend.schemas.course import CourseSchema
+from backend.schemas.user import UserSchema
+from backend.utils.decorators import admin_required
+from backend.utils.email import send_email
 
 admin_bp = Blueprint("admin", __name__)
 admin_user_schema = UserSchema(many=True)
@@ -29,7 +29,7 @@ course_schema = CourseSchema()
 
 
 def _log_admin_action(action: str, metadata: dict | None = None) -> None:
-    entry = AdminLog(admin_id=current_user.id, action=action, metadata=json.dumps(metadata or {}))
+    entry = AdminLog(admin_id=current_user.id, action=action, payload=json.dumps(metadata or {}))
     db.session.add(entry)
     db.session.commit()
 

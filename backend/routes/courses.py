@@ -6,11 +6,11 @@ from time import sleep
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import current_user, jwt_required
 
-from ..extensions import db
-from ..models import Course, Lesson, Purchase, SubscriptionTier
-from ..schemas.course import CourseSchema, LessonSchema
-from ..schemas.purchase import PurchaseSchema
-from ..utils.decorators import user_active_required
+from backend.extensions import db
+from backend.models import Course, Lesson, Purchase, SubscriptionTier
+from backend.schemas.course import CourseSchema, LessonSchema
+from backend.schemas.purchase import PurchaseSchema
+from backend.utils.decorators import user_active_required
 
 courses_bp = Blueprint("courses", __name__)
 course_schema = CourseSchema(many=True)

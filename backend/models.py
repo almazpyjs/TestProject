@@ -4,7 +4,7 @@ from enum import Enum
 from sqlalchemy import func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from .extensions import db
+from backend.extensions import db
 
 
 class UserStatus(Enum):
@@ -158,7 +158,7 @@ class AdminLog(db.Model, TimestampMixin):
     id: Mapped[int] = mapped_column(primary_key=True)
     admin_id: Mapped[int] = mapped_column(db.ForeignKey("users.id"), nullable=False)
     action: Mapped[str] = mapped_column(nullable=False)
-    metadata: Mapped[str | None]
+    payload: Mapped[str | None]
 
     admin: Mapped[User] = relationship()
 
