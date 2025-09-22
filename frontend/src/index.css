@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply font-body text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-900 antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38bdf8, #f97316);
+  border-radius: 9999px;
+}
+
+.glass-panel {
+  @apply bg-white/70 dark:bg-slate-800/70 backdrop-blur rounded-3xl shadow-glass border border-white/40 dark:border-slate-700/40;
+}
+
+.card-hover {
+  @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl;
+}
+
