@@ -10,6 +10,9 @@ const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Auth/Login'));
 const Register = lazy(() => import('./pages/Auth/Register'));
 const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword'));
+const ProgramPage = lazy(() => import('./pages/Program'));
+const SubscriptionsPage = lazy(() => import('./pages/Subscriptions'));
+const ReviewsPage = lazy(() => import('./pages/Reviews'));
 const CourseOverview = lazy(() => import('./pages/Course/CourseOverview'));
 const LessonView = lazy(() => import('./pages/Course/LessonView'));
 const UserDashboard = lazy(() => import('./pages/Dashboard/UserDashboard'));
@@ -28,6 +31,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/program" element={<ProgramPage />} />
+            <Route path="/subscriptions" element={<SubscriptionsPage />} />
+            <Route path="/reviews" element={<ReviewsPage />} />
             <Route
               path="/dashboard"
               element={

@@ -14,9 +14,9 @@ function Footer() {
         <div>
           <h4 className="text-sm font-semibold uppercase text-slate-500">Навигация</h4>
           <ul className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-400">
-            <li><Link to="/#curriculum">Программа курса</Link></li>
-            <li><Link to="/#pricing">Тарифы</Link></li>
-            <li><Link to="/#faq">FAQ</Link></li>
+            <li><Link to="/program">Программа курса</Link></li>
+            <li><Link to="/subscriptions">Тарифы</Link></li>
+            <li><Link to="/subscriptions#faq">FAQ</Link></li>
           </ul>
         </div>
         <div>

@@ -6,9 +6,9 @@ import { useAuth } from '../context/AuthContext';
 
 const navItems = [
   { to: '/', label: 'Главная', exact: true },
-  { to: '/#curriculum', label: 'Программа' },
-  { to: '/#pricing', label: 'Подписки' },
-  { to: '/#reviews', label: 'Отзывы' }
+  { to: '/program', label: 'Программа', exact: false },
+  { to: '/subscriptions', label: 'Подписки', exact: false },
+  { to: '/reviews', label: 'Отзывы', exact: false }
 ];
 
 function Navbar() {
@@ -45,6 +45,7 @@ function Navbar() {
             <NavLink
               key={item.to}
               to={item.to}
+              end={item.exact}
               className={({ isActive }) =>
                 `text-sm font-medium transition hover:text-primary ${isActive ? 'text-primary' : 'text-slate-600 dark:text-slate-300'}`
               }
